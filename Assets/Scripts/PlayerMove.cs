@@ -24,6 +24,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         RbMove();
+        PlayerDie();
     }
 
     private void RbMove() //충돌이 있는 경우 쓰는 게 좋음
@@ -49,11 +50,16 @@ public class PlayerMove : MonoBehaviour
         if (other.CompareTag("Enemy")) //player 가 Enemy와 충돌하면 DecreaseHp
         {
             hpGage.fillAmount -= 0.2f;
-            if (hpGage.fillAmount <= 0)
-            {
-                Destroy(gameObject);
-                SceneManager.LoadScene("gameover");
-            }
+        }
+    }
+
+    void PlayerDie()
+    {
+        if (hpGage.fillAmount <= 0)
+        {
+            gameObject.SetActive(false);
+            SceneManager.LoadScene("gameover");
+            //UIManager.Instance.Plusscore();
         }
     }
 }

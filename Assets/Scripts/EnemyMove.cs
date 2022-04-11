@@ -26,11 +26,13 @@ public class EnemyMove : BulletMove
     {
         if (other.CompareTag("Bullet")) //enemy 가 Bullet과 3번 충돌하면 Destroy
         {
+            Destroy(other.gameObject);
             a++;
             if (a >= 2)
             {
                 Destroy(gameObject);
                 a = 0;
+                ScoreManager.Instance.Plusscore();
             }
         }
     }
